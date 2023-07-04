@@ -17,7 +17,7 @@
 #define TIME_SEND           50        // [ms] Sending time interval
 #define SPEED_MAX_TEST      200         // [-] Maximum speed for testing
 #define SPEED_STEP          10          // [-] Speed step
-#define DEBUG_RX                        // [-] Debug received data. Prints all bytes to serial (comment-out to disable)
+//#define DEBUG_RX                        // [-] Debug received data. Prints all bytes to serial (comment-out to disable)
 #define LED_BUILTIN 2
 
 #define SSID "KVANT_24"
@@ -39,7 +39,7 @@ char vcmd;
 int maxspeed = 200;
 int lSpeed = 0;
 int rSpeed = 0;
-bool demo = true;
+bool demo = false;
 
 // Global variables
 uint8_t idx = 0;                        // Index for new data pointer
@@ -250,8 +250,8 @@ void setup(){
   Serial.println("Hoverboard Serial v1.0");
   SerialBT.begin("RoverControl"); //Bluetooth device name
   Serial.println("The device started, now you can pair it with bluetooth!");
-  HoverSerial_1.begin(15200, SERIAL_8N1, 4, 2);
-  HoverSerial_2.begin(15200, SERIAL_8N1, 16, 17); 
+  HoverSerial_1.begin(HOVER_SERIAL_BAUD, SERIAL_8N1, 4, 2);
+  HoverSerial_2.begin(HOVER_SERIAL_BAUD, SERIAL_8N1, 16, 17); 
   if (!WiFi.config(local_IP, gateway, subnet, primaryDNS, secondaryDNS)) {
     Serial.println("STA Failed to configure");
   }
@@ -280,9 +280,9 @@ void setup(){
   Serial.println(WiFi.dnsIP());
 
   // Port defaults to 3232
-  ArduinoOTA.setPort(3232);
+  //ArduinoOTA.setPort(3232);
   // Hostname defaults to esp3232-[MAC]
-  ArduinoOTA.setHostname("Rover");
+  //ArduinoOTA.setHostname("Rover");
   ArduinoOTA.begin();
 }
 
