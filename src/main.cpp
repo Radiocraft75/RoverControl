@@ -279,9 +279,9 @@ void setup(){
   Serial.println(WiFi.dnsIP());
 
   // Port defaults to 3232
-  //ArduinoOTA.setPort(3232);
+  ArduinoOTA.setPort(3232);
   // Hostname defaults to esp3232-[MAC]
-  //ArduinoOTA.setHostname("Rover");
+  ArduinoOTA.setHostname("Rover");
   ArduinoOTA.begin();
 }
 
