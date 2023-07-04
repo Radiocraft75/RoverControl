@@ -9,7 +9,6 @@
 #include "BluetoothSerial.h"
 #include <WiFi.h>
 #include <ArduinoOTA.h>
-
 // ########################## DEFINES ##########################
 #define HOVER_SERIAL_BAUD   115200      // [-] Baud rate for HoverSerial (used to communicate with the hoverboard)
 #define SERIAL_BAUD         9600        // [-] Baud rate for built-in Serial (used for the Serial Monitor)
@@ -72,14 +71,14 @@ SerialFeedback NewFeedback;
 
 // Вперед
 void vforward() {
-  lSpeed = maxspeed;
-  rSpeed = maxspeed * -1;
+  lSpeed = maxspeed* -1;
+  rSpeed = maxspeed;
 }
 
 // Назад
 void vbackward() {
-  lSpeed = maxspeed * -1;
-  rSpeed = maxspeed;
+  lSpeed = maxspeed;
+  rSpeed = maxspeed * -1;
 }
 
 // Влево
