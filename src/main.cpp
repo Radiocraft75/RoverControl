@@ -283,6 +283,11 @@ void setup(){
   // Hostname defaults to esp3232-[MAC]
   ArduinoOTA.setHostname("Rover");
   ArduinoOTA.begin();
+
+  pinMode(26, OUTPUT);
+  pinMode(27, OUTPUT);
+  digitalWrite(26, HIGH);
+  digitalWrite(27, HIGH);
 }
 
 unsigned long iTimeSend = 0;
@@ -321,19 +326,34 @@ void loop(void) {
     {
       vrelease();
     }
-    // Подсветка 11
-    if (vcmd == 'W') {}
-    // Подсветка 11
-    if (vcmd == 'w') {}
+
+    // Включение драйверов
+    if (vcmd == 'W') {
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      delay(50);
+      digitalWrite(26, HIGH);
+      digitalWrite(27, HIGH);
+    }
+    // Выключение драйверов
+    if (vcmd == 'w') {
+      digitalWrite(26, LOW);
+      digitalWrite(27, LOW);
+      delay(300);
+      digitalWrite(26, HIGH);
+      digitalWrite(27, HIGH);
+    }
+
     // Подсветка 12
     if (vcmd == 'U') {}
     // Подсветка 12
     if (vcmd == 'u') {}
-    // Подсветка 13
+
+    // Активация демо режима
     if (vcmd == 'X') {
       demo = true;
     }
-    // Подсветка 13
+    // Деактивация демо режима
     if (vcmd == 'x')
     {
       demo = false;
