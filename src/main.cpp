@@ -34,6 +34,11 @@ HardwareSerial SerialPort1(1);
 HardwareSerial SerialPort2(2);
 #define HoverSerial_2 SerialPort2
 
+#define PIN_ON_LEFT_DRIVER 26
+#define PIN_ON_RIGHT_DRIVER 27
+#define ON_DRIVER_TIME 50
+#define OFF_DRIVER_TIME 300
+
 char vcmd;
 int maxspeed = 200;
 int lSpeed = 0;
@@ -284,10 +289,10 @@ void setup(){
   ArduinoOTA.setHostname("Rover");
   ArduinoOTA.begin();
 
-  pinMode(26, OUTPUT);
-  pinMode(27, OUTPUT);
-  digitalWrite(26, HIGH);
-  digitalWrite(27, HIGH);
+  pinMode(PIN_ON_LEFT_DRIVER, OUTPUT);
+  pinMode(PIN_ON_RIGHT_DRIVER, OUTPUT);
+  digitalWrite(PIN_ON_LEFT_DRIVER, HIGH);
+  digitalWrite(PIN_ON_RIGHT_DRIVER, HIGH);
 }
 
 unsigned long iTimeSend = 0;
@@ -329,19 +334,19 @@ void loop(void) {
 
     // Включение драйверов
     if (vcmd == 'W') {
-      digitalWrite(26, LOW);
-      digitalWrite(27, LOW);
-      delay(50);
-      digitalWrite(26, HIGH);
-      digitalWrite(27, HIGH);
+      digitalWrite(PIN_ON_LEFT_DRIVER, LOW);
+      digitalWrite(PIN_ON_RIGHT_DRIVER, LOW);
+      delay(ON_DRIVER_TIME);
+      digitalWrite(PIN_ON_LEFT_DRIVER, HIGH);
+      digitalWrite(PIN_ON_RIGHT_DRIVER, HIGH);
     }
     // Выключение драйверов
     if (vcmd == 'w') {
-      digitalWrite(26, LOW);
-      digitalWrite(27, LOW);
-      delay(300);
-      digitalWrite(26, HIGH);
-      digitalWrite(27, HIGH);
+      digitalWrite(PIN_ON_LEFT_DRIVER, LOW);
+      digitalWrite(PIN_ON_RIGHT_DRIVER, LOW);
+      delay(OFF_DRIVER_TIME);
+      digitalWrite(PIN_ON_LEFT_DRIVER, HIGH);
+      digitalWrite(PIN_ON_RIGHT_DRIVER, HIGH);
     }
 
     // Подсветка 12
