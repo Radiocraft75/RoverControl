@@ -40,7 +40,7 @@ HardwareSerial SerialPort2(2);
 #define OFF_DRIVER_TIME 300
 
 char vcmd;
-int maxspeed = 200;
+int maxspeed = 100;
 int lSpeed = 0;
 int rSpeed = 0;
 bool demo = false;
@@ -102,6 +102,18 @@ void vright() {
 void vrelease() {
   lSpeed = 0;
   rSpeed = 0;
+}
+
+// Forward Left
+void forwardLeft() {
+  lSpeed = maxspeed * -1;
+  rSpeed = maxspeed * 0.5;
+}
+
+// Forward Right
+void forwardRight() {
+  lSpeed = maxspeed * -0.5;
+  rSpeed = maxspeed;
 }
 
 void vspeed(int spd) {
@@ -331,6 +343,18 @@ void loop(void) {
     {
       vrelease();
     }
+
+    // Forward Left
+    if (vcmd == 'G')
+    {
+      forwardLeft();
+    }
+    // Forward Right
+    if (vcmd == 'I')
+    {
+      forwardRight();
+    }
+
 
     // Включение драйверов
     if (vcmd == 'W') {
